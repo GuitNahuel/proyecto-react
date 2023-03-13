@@ -1,16 +1,45 @@
-import ItemList from "./ItemList";
-import { useParams } from "react-router-dom";
-import Data from "../data.json";
+import React, { useState, useEffect } from 'react'
+import ItemList from './ItemList';
+import data from "../data.json";
+import { useParams } from 'react-router-dom';
 const ItemListContainer = () => {
-    const { category } = useParams();
+    const [items, setItems] = useState([])
+    const { id } = useParams()
+    const getDatos = () => {
+        return new Promise((resolve, reject) => {
+            if (data.length === 0) {
+                reject(new Error("No hay datos"));
+            }
 
-    const catFilter = Data.filter((product) => product.category === category);
+            setTimeout(() => {
+                resolve(data)
+            }, 1500);
+        });
+    };
+
+    async function fetchingData() {
+        try {
+            const datosFetched = await getDatos();
+            if (id) {
+                setItems(datosFetched.filter((item) => item.category === id))
+            } else {
+                setItems(datosFetched)
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        fetchingData();
+    }, [id])
 
     return (
-        <div>
-            {category ? <ItemList product={catFilter} /> : <ItemList product={Data} />}
-        </div>
-    );
-};
+        <>
+            <ItemList data={items} />
+        </>
+    )
+}
 
-export default ItemListContainer
+export default ItemListContainer;

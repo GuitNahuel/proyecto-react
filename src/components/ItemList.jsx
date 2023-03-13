@@ -2,18 +2,18 @@
 import React from 'react';
 import Item from './Item';
 
-const ItemList = ({ product }) => {
+const ItemList = ({ data }) => {
     return (
         <div className='shop-items' >
-            {product?.map((product) => (
+            {data?.map((data) => (
                 <Item
-                    id={product.id}
-                    key={product.id}
-                    title={product.title}
-                    category={product.category}
-                    description={product.description}
-                    image={product.image}
-                    price={product.price}
+                    key={data.id}
+                    id={data.id}
+                    title={data.title}
+                    category={data.category}
+                    description={data.description}
+                    image={data.image}
+                    price={data.price}
                 />
             ))}
         </div>

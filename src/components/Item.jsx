@@ -39,10 +39,7 @@ const Item = ({ id,title, price, image}) => {
                 <CardFooter>
                     <ButtonGroup spacing='2'>
                         <Button variant='solid' colorScheme='yellow'>
-                            Buy now
-                        </Button>
-                        <Button variant='ghost' colorScheme='black'>
-                            Add to cart
+                                Comprar ahora
                         </Button>
                         <Button variant="solid" colorScheme="yellow">
                             <Link to={`/item/${id}`}>Detalles</Link>
