@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 import {
     Image,
     Card,
@@ -11,44 +12,36 @@ import {
     Button,
     Text
 } from '@chakra-ui/react'
-import { Link } from "react-router-dom"
 
-
-
-
-const Item = ({ id,title, price, image}) => {
-    return ( 
+const Item = ({ info }) => {
+    return (
         <div>
-        <div key={id}>
+        <div>
             <Card maxW='sm' >
                 <CardBody>
                     <Image
                         boxSize='300px'
-                        src={image}
+                        src={info.imagen}
                         alt='Green double couch with wooden legs'
                         borderRadius='lg'
                     />
                     <Stack mt='6' spacing='3'>
-                        <Heading size='md'>{title}</Heading>
+                        <Heading size='md'>{info.titulo} </Heading>
                         <Text color='black' fontSize='2xl'>
-                            ${price}
+                            ${info.precio}
                         </Text>
                     </Stack>
                 </CardBody>
                 <Divider />
                 <CardFooter>
-                    <ButtonGroup spacing='2'>
-                        <Button variant='solid' colorScheme='yellow'>
-                                Comprar ahora
-                        </Button>
                         <Button variant="solid" colorScheme="yellow">
-                            <Link to={`/item/${id}`}>Detalles</Link>
+                            <Link to={`/product/${info.id}`}>Detalles</Link>
                         </Button>
-                    </ButtonGroup>
                 </CardFooter>
             </Card>
         </div>
         </div>
-    )
-}
-export default Item
+    );
+};
+
+export default Item;

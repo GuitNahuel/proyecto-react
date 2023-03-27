@@ -1,53 +1,45 @@
-import { useContext, useState } from "react";
-import {
-    Text,
-    ButtonGroup,
-    IconButton,
-    Tooltip,
-    Center,
-    Button,
-} from "@chakra-ui/react";
-import { AddIcon, MinusIcon } from "@chakra-ui/icons";
+import React from "react";
+import { useState } from "react";
+import {Text, ButtonGroup,Button, Center, Tag} from "@chakra-ui/react";
 
-const ItemCount = ({ stock, id, price, name }) => {
-    const [count, setCount] = useState(1);
+const ItemCount = (props) => {
+    const [count, setCount] = useState(props.initial);
 
-    const addQty = () => {
-        setCount(count + 1);
-    };
+    function aumentar() {
+        if (count < props.stock) {
+            setCount(count + 1);
+        }
+    }
 
-    const substractQty = () => {
-        setCount(count - 1);
-    };
+    function disminuir() {
+        if (count > 1) {
+            setCount(count - 1);
+        }
+    }
 
     return (
-        <>
-            <ButtonGroup size="sm" isAttached variant="outline">
-                {count <= 1 ? (
-                    <Tooltip label="minimum stock reached" placement="bottom">
-                        <IconButton icon={<MinusIcon />} isDisabled />
-                    </Tooltip>
-                ) : (
-                    <IconButton icon={<MinusIcon />} onClick={substractQty} />
-                )}
-                <Center>
-                    <Button
-                        onClick={() => addToCart()}
-                        variant="solid"
-                        colorScheme="yellow"
-                    >
-                        Agregar al carro: {count}
+        <ButtonGroup  isAttached variant="outline">
+                    <Button  colorScheme='red' onClick={disminuir}>
+                    -
                     </Button>
-                </Center>
-                {count < stock ? (
-                    <IconButton icon={<AddIcon />} onClick={addQty} />
-                ) : (
-                    <Tooltip label="stock limit reached" placement="bottom">
-                        <IconButton icon={<AddIcon />} isDisabled />
-                    </Tooltip>
-                )}
-            </ButtonGroup>
-        </>
+                    <Tag>
+                    {count}
+                    </Tag>
+                    <Button  colorScheme='green' onClick={aumentar}>
+                    +
+                    </Button>
+                    <Button
+                        onClick={() => props.onAdd(count)}
+                    >
+                        Agregar al carrito
+                    </Button>
+                <Center>
+                    <Tag>
+                    El stock disponible es: {props.stock} unidades
+                    </Tag>
+                    </Center>
+                    
+        </ButtonGroup>
     );
 };
 

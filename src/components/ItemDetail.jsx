@@ -1,3 +1,8 @@
+import React from "react";
+import ItemCount from "./ItemCount";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useCartContext } from "../context/CartContext";
 import {
     Card,
     CardBody,
@@ -7,14 +12,21 @@ import {
     Stack,
     Text,
     Center,
-} from "@chakra-ui/react";
-import React from "react";
-import ItemCount from "./ItemCount";
+    Button
+} from '@chakra-ui/react'
 
+const ItemDetail = ({ item }) => {
+    const [goToCart, setGoToCart] = useState(false);
 
-const ItemDetail = ({ producto }) => {
-    const {id,title, price, stock, category, image, description}=producto
+    const { addItem } = useCartContext();
+
+    function onAdd(quantity) {
+        setGoToCart(true);
+        addItem(item, quantity);
+    }
+
     return (
+        <Center>
         <Card
             direction={{ base: 'column', sm: 'row' }}
             overflow='hidden'
@@ -23,29 +35,35 @@ const ItemDetail = ({ producto }) => {
             <Image
                 objectFit='cover'
                 maxW={{ base: '100%', sm: '400px' }}
-                src={image}
+                src={item.imagen}
                 alt='Caffe Latte'
             />
             <Stack>
                 <CardBody>
-                    <Heading size='xl'>{title}</Heading>
-                    <Text py='10'>{description}</Text>
-                    <Text py='10'>CATEGORIA: {category}</Text>
-
-                    <Heading size='l'>${price}</Heading>
+                    <Heading>{item.titulo}</Heading>
+                    <Heading>${item.precio}</Heading>
+                    <Text>{item.descripcion}</Text>
                 </CardBody>
-                <CardFooter>
-                    <Center className="card-footer">
-                        <ItemCount
-                            stock={stock}
-                            id={id}
-                            price={price}
-                            name={title}
-                        />
-                    </Center>
-                </CardFooter>
+                {goToCart ? (
+                    <div>
+                            <Link to="/cart">
+                                <Button colorScheme="yellow">Ir al carrito</Button>
+                            </Link>
+                        <Link to="/">
+                        <Button colorScheme="red">
+                            Seguir comprando
+                        </Button>
+                        </Link>
+                        </div>
+                        
+                ) : (
+                    <div>
+                        <ItemCount initial={1} stock={item.stock} onAdd={onAdd} />
+                    </div>
+                )}
             </Stack>
         </Card>
+        </Center>
     );
 };
 

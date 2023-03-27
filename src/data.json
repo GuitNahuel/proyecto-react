@@ -1,9 +1,0 @@
-[
-    {"id": 1, "title": "Martillo Galponero", "description": "Martillo adecuado para el uso domestico y profesional", "price":3000, "stock": 10, "category": "manuales", "image": "https://arcencohogar.vtexassets.com/arquivos/ids/285428-600-600?v=637651652425870000&width=600&height=600&aspect=true"},
-    {"id": 2, "title": "Serrucho SilverShadow", "description": "Serrucho adecuado para el uso hogareño", "price":2000, "stock": 10, "category": "manuales", "image": "https://arcencohogar.vtexassets.com/arquivos/ids/316425-600-600?v=637835504333830000&width=600&height=600&aspect=true"},
-    {"id": 3, "title": "Amoladora Black&Decker", "description": "Amoladora de uso más apropiado para el domicilio", "price":10000, "stock": 20, "category": "electricas", "image": "https://arcencohogar.vtexassets.com/arquivos/ids/326858-600-600?v=637944572543170000&width=600&height=600&aspect=true"},
-    {"id": 4, "title": "Taladro Percutor DeWalt", "description": "Taladro para todo tipo de superficies de uso profesional","price":35000, "stock": 5, "category": "electricas", "image": "https://arcencohogar.vtexassets.com/arquivos/ids/327004-600-600?v=637944633492330000&width=600&height=600&aspect=true"},
-    {"id": 5, "title": "Pinza DeWalt", "description": "Pinza de uso Profesional","price":2500, "stock": 5, "category": "manuales", "image": "https://arcencohogar.vtexassets.com/arquivos/ids/290058-600-600?v=637651737379300000&width=600&height=600&aspect=true"},
-    {"id": 6, "title": "Lijadora Roto Orbital 275W DeWalt ", "description": "Lijadora de uso Profesional","price":25000, "stock": 35, "category": "electricas", "image": "https://arcencohogar.vtexassets.com/arquivos/ids/327049-600-600?v=637944650784730000&width=600&height=600&aspect=true"}
-]
-

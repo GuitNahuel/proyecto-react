@@ -1,45 +1,59 @@
-import React, { useState, useEffect } from 'react'
-import ItemList from './ItemList';
-import data from "../data.json";
-import { useParams } from 'react-router-dom';
+import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import ItemList from "./ItemList";
+import { useParams } from "react-router-dom";
+import {
+    getFirestore,
+    collection,
+    getDocs,
+    query,
+    where,
+} from "firebase/firestore";
+import { Image, Box, Center,Text, AbsoluteCenter, Flex, Heading } from '@chakra-ui/react'
+
 const ItemListContainer = () => {
-    const [items, setItems] = useState([])
-    const { id } = useParams()
-    const getDatos = () => {
-        return new Promise((resolve, reject) => {
-            if (data.length === 0) {
-                reject(new Error("No hay datos"));
-            }
-
-            setTimeout(() => {
-                resolve(data)
-            }, 1500);
-        });
-    };
-
-    async function fetchingData() {
-        try {
-            const datosFetched = await getDatos();
-            if (id) {
-                setItems(datosFetched.filter((item) => item.category === id))
-            } else {
-                setItems(datosFetched)
-            }
-        }
-        catch (error) {
-            console.log(error);
-        }
-    }
+    const [items, setItems] = useState([]);
+    const { categoria } = useParams();
 
     useEffect(() => {
-        fetchingData();
-    }, [id])
+        const querybd = getFirestore();
+        const queryCollection = collection(querybd, "productos");
+
+        if (categoria) {
+            const queryFilter = query(
+                queryCollection,
+                where("categoria", "==", categoria)
+            );
+            getDocs(queryFilter).then((res) =>
+                setItems(
+                    res.docs.map((product) => ({ id: product.id, ...product.data() }))
+                )
+            );
+        } else {
+            getDocs(queryCollection).then((res) =>
+                setItems(
+                    res.docs.map((product) => ({ id: product.id, ...product.data() }))
+                )
+            );
+        }
+    }, [categoria]);
 
     return (
-        <>
-            <ItemList data={items} />
-        </>
-    )
-}
+
+        <div>
+            <Center>
+                <Heading fontSize='4xl' color="red">HerraMás</Heading>
+                <Box boxSize='xl'>
+                    <Image src="https://arcencohogar.vtexassets.com/arquivos/ids/327033-600-600?v=637944645787400000&width=600&height=600&aspect=true" alt='Herramienta' />
+                </Box>
+            </Center>
+            <div className="shop-items">
+                <ItemList productos={items} />
+            </div>
+
+        </div>
+    );
+};
 
 export default ItemListContainer;

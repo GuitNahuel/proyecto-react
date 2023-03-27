@@ -1,7 +1,42 @@
 .shop-items {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;;}
+.color-navbar {
+  background-color: rgb(170, 31, 31);
+}
 
-    display: grid;
-    height: 100%;
-    grid-template-columns: 1fr 1fr 1fr;
-    justify-items: center;
+.chakra-card {
+  margin: 30px;
+  background-color: red;
+}
+.cart-herra{
+  display: grid;
+  flex-direction: row;
+  align-items: center;
+  justify-items: center;
+}
+.item-herra{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+  justify-content: center;
+
+}
+.cart-widget{
+  display: flex;
+  align-items: center;
+}
+.com-herra{
+  display: flex;
+  align-items: center;
+
+}
+.form-herra{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
 }
